@@ -6,115 +6,93 @@ const rock = document.getElementById('rock');
 const paper = document.getElementById('paper');
 const scissors = document.getElementById('scissors');
 const result = document.getElementById('result');
-let playerScore = 1;
-let cpuScore = 1;
-let drawScore = 1;
+let playerScore = 0;
+let cpuScore = 0;
+let drawScore = 0;
 const draw = document.getElementById('draw');
 const displayPlayerScore = document.getElementById('pscore');
 const displayCpuScore = document.getElementById('cscore');
 let result2 = "";
 
-let rockImage = "assets/rock.jpg"
-let paperImage = "assets/paper.jpg"
-let scissorsImage = "assets/scissors.jpg"
+const rockImage = "assets/rock.jpg";
+const paperImage = "assets/paper.jpg";
+const scissorsImage = "assets/scissors.jpg";
 
+const image1 = document.querySelectorAll("img")[0];
+const image2 = document.querySelectorAll("img")[1];
 
-let image1 = document.querySelectorAll("img")[0];
-let image2 = document.querySelectorAll("img")[1];
+function cMove() {
+    const moves = ['Rock', 'Paper', 'Scissors'];
+    computerMove = moves[Math.floor(Math.random() * 3)];
+}
 
-rock.addEventListener('click', () =>{
+function updateResult(playerMove, computerMove, resultText, imageSrc) {
+    result.textContent = `You picked ${playerMove}, Computer picked ${computerMove}, ${resultText}`;
+    image2.setAttribute("src", imageSrc);
+}
+
+function addScore(resultText) {
+    if (resultText === 'YOU WIN!') {
+        displayPlayerScore.textContent = "Player Score: " + ++playerScore;
+    } else if (resultText === 'YOU LOSE!') {
+        displayCpuScore.textContent = "CPU Score: " + ++cpuScore;
+    } else if (resultText === 'DRAW!') {
+        draw.textContent = "DRAW: " + ++drawScore;
+    }
+}
+
+rock.addEventListener('click', () => {
     playerMove = 'Rock';
     cMove();
     image1.setAttribute("src", rockImage);
 
-    if (computerMove === 'Rock'){
+    if (computerMove === 'Rock') {
         result2 = "DRAW!";
-        result.textContent = "You picked " + playerMove + ", Computer picked " + computerMove + ", " + result2;
-        image2.setAttribute("src", imageSource + rockImage);
-    }if(computerMove === 'Scissors'){
+        updateResult(playerMove, computerMove, result2, rockImage);
+    } else if (computerMove === 'Scissors') {
         result2 = "YOU WIN!";
-        result.textContent = "You picked " + playerMove + ", Computer picked " + computerMove + ", " + result2;
-        image2.setAttribute("src", scissorsImage);
-    }if (computerMove === 'Paper'){
+        updateResult(playerMove, computerMove, result2, scissorsImage);
+    } else {
         result2 = "YOU LOSE!";
-        result.textContent = "You picked " + playerMove + ", Computer picked " + computerMove + ", " + result2;
-        image2.setAttribute("src", paperImage);
+        updateResult(playerMove, computerMove, result2, paperImage);
     }
-    addScore();
-    emojiShow();
-
+    addScore(result2);
 });
 
-paper.addEventListener('click', () =>{
+paper.addEventListener('click', () => {
     playerMove = 'Paper';
     cMove();
     image1.setAttribute("src", paperImage);
 
-    if (computerMove === 'Rock'){
+    if (computerMove === 'Rock') {
         result2 = "YOU WIN!";
-        image2.setAttribute("src", imageSource + rockImage);
-        result.textContent = "You picked " + playerMove + ", Computer picked " + computerMove + ", " +result2;
-    }if(computerMove === 'Scissors'){
+        updateResult(playerMove, computerMove, result2, rockImage);
+    } else if (computerMove === 'Scissors') {
         result2 = "YOU LOSE!";
-        image2.setAttribute("src", scissorsImage);
-        result.textContent = "You picked " + playerMove + ", Computer picked " + computerMove + ", " +result2;
-    }if (computerMove === 'Paper'){
+        updateResult(playerMove, computerMove, result2, scissorsImage);
+    } else {
         result2 = "DRAW!";
-        image2.setAttribute("src", paperImage);
-        result.textContent = "You picked " + playerMove + ", Computer picked " + computerMove + ", " +result2;
+        updateResult(playerMove, computerMove, result2, paperImage);
     }
-    addScore();
-    emojiShow();
-    
+    addScore(result2);
 });
 
-scissors.addEventListener('click', () =>{
+scissors.addEventListener('click', () => {
     playerMove = 'Scissors';
     cMove();
     image1.setAttribute("src", scissorsImage);
 
-    if (computerMove === 'Rock'){
+    if (computerMove === 'Rock') {
         result2 = "YOU LOSE!";
-        image2.setAttribute("src", imageSource + rockImage);
-        result.textContent = "You picked " + playerMove + ", Computer picked " + computerMove + ", " +result2;
-    }if(computerMove === 'Scissors'){
+        updateResult(playerMove, computerMove, result2, rockImage);
+    } else if (computerMove === 'Scissors') {
         result2 = "DRAW!";
-        image2.setAttribute("src", scissorsImage);
-        result.textContent = "You picked " + playerMove + ", Computer picked " + computerMove + ", " +result2;
-    }if (computerMove === 'Paper'){
+        updateResult(playerMove, computerMove, result2, scissorsImage);
+    } else {
         result2 = "YOU WIN!";
-        image2.setAttribute("src", paperImage);
-        result.textContent = "You picked " + playerMove + ", Computer picked " + computerMove + ", " +result2;
+        updateResult(playerMove, computerMove, result2, paperImage);
     }
-    addScore();
-    emojiShow();
+    addScore(result2);
 });
 
 
-
-function cMove(){
-    let randomNumber = Math.floor((Math.random() * 3)+ 1) ;
-
-    if (randomNumber === 1){
-        computerMove = 'Rock';
-    }
-     if(randomNumber === 2){
-        computerMove = 'Paper';
-    }
-    if (randomNumber === 3){
-        computerMove = 'Scissors';
-    }
-}
-
-function addScore(){
-
-    if(result2 === 'YOU WIN!'){
-        displayPlayerScore.textContent = "Player Score: " + playerScore++;
-    }if (result2 === 'YOU LOSE!'){
-        displayCpuScore.textContent = "CPU Score: " + cpuScore++;
-    }if (result2 === 'DRAW!'){
-        draw.textContent = "DRAW: " + drawScore++;
-    }
-}
-
-    
