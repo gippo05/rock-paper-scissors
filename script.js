@@ -13,6 +13,7 @@ const draw = document.getElementById('draw');
 const displayPlayerScore = document.getElementById('pscore');
 const displayCpuScore = document.getElementById('cscore');
 let result2 = "";
+let emojis = ["✊","🖐️", "✌️" ];
 
 rock.addEventListener('click', () =>{
     playerMove = 'Rock';
@@ -30,6 +31,7 @@ rock.addEventListener('click', () =>{
         result.textContent = "You picked " + playerMove + ", Computer picked " + computerMove + ", " + result2;
     }
     addScore();
+    emojiShow();
 
 });
 
@@ -48,6 +50,7 @@ paper.addEventListener('click', () =>{
         result.textContent = "You picked " + playerMove + ", Computer picked " + computerMove + ", " +result2;
     }
     addScore();
+    emojiShow();
     
 });
 
@@ -66,6 +69,7 @@ scissors.addEventListener('click', () =>{
         result.textContent = "You picked " + playerMove + ", Computer picked " + computerMove + ", " +result2;
     }
     addScore();
+    emojiShow();
 });
 
 
@@ -95,3 +99,17 @@ function addScore(){
     }
 }
 
+function emojiShow(){
+
+    if (computerMove === 'Rock'){
+        CPUEmoji.textContent = emojis[0];
+    }
+    if (computerMove === 'Paper'){
+        CPUEmoji.textContent = emojis[1];
+    }
+    if (computerMove === 'Scissors'){
+        CPUEmoji.textContent = emojis[2]
+    }
+}
+
+    
